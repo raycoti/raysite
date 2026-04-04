@@ -1,0 +1,10 @@
+{
+  "arrowParens": "always",
+  "bracketSpacing": false,
+  "jsxSingleQuote": true,
+  "printWidth": 100,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "none",
+  "tailwindConfig": "./app/globals.css"
+}
