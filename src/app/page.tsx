@@ -2,8 +2,8 @@ import Link from 'next/link';
 import {Roboto, Nunito} from 'next/font/google';
 import {ViewTransition} from 'react';
 
-const nunito = Nunito({variable: '--nunito', subsets: ['latin']});
-const roboto = Roboto({variable: '--roboto', subsets: ['latin']});
+const nunito = Nunito({subsets: ['latin']});
+const roboto = Roboto({subsets: ['latin']});
 
 export default function Home() {
   return (
@@ -14,7 +14,7 @@ export default function Home() {
           <h2 className={`${nunito.className} font-bold text-3xl my-5`}>
             Blurring the line between dreams and reality
           </h2>
-          <Link className={`enter ${roboto.variable}`} href='/about'>
+          <Link className={`enter ${roboto.className}`} href='/about'>
             ENTER
           </Link>
         </div>
