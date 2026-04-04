@@ -4,8 +4,8 @@ const AboutMePage = () => {
   return (
     <div className='flex flex-col h-full items-center m-4'>
       <h1 className='text-4xl capitalize'>About me</h1>
-      <div className='flex flex-col sm:flex-row min-h-96 xl:h-2/3 '>
-        <div className='min-w-96 xl:min-w-80 xl:max-h-8/12 xl:max-w-3xl max-sm:h-full relative'>
+      <div className='flex flex-col sm:flex-row min-h-96 xl:h-2/3'>
+        <div className='min-w-96 xl:min-w-80 xl:max-h-8/12 xl:max-w-3xl max-sm:h-full relative min-h-72'>
           <Image
             fill
             objectFit='contain'
