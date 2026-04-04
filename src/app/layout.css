@@ -1,12 +1,5 @@
 .container {
-  h1 {
-    font-size: 2.5rem;
-    font-weight: bold;
-  }
-  h2 {
-    font-size: 2rem;
-    font-weight: bold;
-  }
+  color: #2c3e50;
 }
 
 .container::after {
@@ -91,33 +84,47 @@
 }
 
 @keyframes slide-down-out {
+  from {
+    opacity: 1;
+    top: 0;
+  }
   to {
+    opacity: 1;
     top: -100vh;
   }
 }
 
-@keyframes slide-down-in {
+/* @keyframes slide-down-in {
   from {
+    opacity: 1;
     top: 0;
   }
+} */
+
+::view-transition-old(.no-fade) {
+  opacity: 1;
 }
 
-.pulse {
-  animation: scaleUp 0.2s ease;
+::view-transition-new(.no-fade) {
+  opacity: 1;
 }
 
-.morph {
-  animation: smoothTransform 0.4s ease;
+::view-transition-new(.slide-out) {
+  animation: 1s ease-in both slide-down-out;
+  opacity: 1;
 }
 
-::view-transition-group(.slide-out) {
-  animation: 600ms ease-in both slide-down-out;
+::view-transition-old(.slide-out) {
+  animation: 1s ease-in both slide-down-out;
+  opacity: 1;
 }
 
-::view-transition-group(.slide-in) {
-  animation: 600ms ease-out both slide-down-in;
-}
+/* ::view-transition-group(.slide-in) {
+  animation: 1s ease-out both slide-down-in;
+  opacity: 1;
+} */
 
 ::view-transition-group(.pulse) {
-  animation: smoothTransform 0.4s ease;
+  animation: smoothTransform 1s ease;
+  opacity: 1;
 }
