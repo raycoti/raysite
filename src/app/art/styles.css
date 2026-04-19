@@ -1,0 +1,107 @@
+.grid-container {
+  display: flex;
+  min-height: 85rem;
+  /* height: 100%; */
+  margin: auto;
+  overflow: hidden;
+  overflow-y: scroll;
+  @media (min-width: 65rem) {
+    max-width: 65rem;
+  }
+}
+
+.art-grid {
+  display: grid;
+  width: 100%;
+  @media (min-width: 80rem) {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(24, 1fr);
+    grid-gap: 0px;
+    grid-template-areas:
+      'tree tree soulSearching soulSearching soulSearching fish  '
+      'tree tree soulSearching soulSearching soulSearching fish  '
+      'tree tree soulSearching soulSearching soulSearching fish  '
+      'tree tree soulSearching soulSearching soulSearching city  '
+      'tree tree shell spiral spiral city  '
+      'tree tree shell spiral spiral city   '
+      'tree tree shell spiral spiral city   '
+      'untitled untitled untitled spiral spiral searchin  '
+      'untitled untitled untitled spiral spiral searchin  '
+      'untitled untitled untitled spiral spiral searchin  '
+      'untitled untitled untitled bridge self self  '
+      'untitled untitled untitled bridge self self  '
+      'untitled untitled untitled bridge self self  '
+      'untitled untitled untitled turtle self self  '
+      'desk arm arm turtle self self   '
+      'desk arm arm turtle self self  '
+      'desk arm arm moon moon moon'
+      'existence arm arm moon moon moon'
+      'existence arm arm moon moon moon'
+      'existence kite kite moon moon moon'
+      'ray kite kite moon moon moon'
+      'ray kite kite moon moon moon'
+      'ray kite kite moon moon moon'
+      'ray . . moon moon moon';
+
+    /* ' . . . . . . . .'
+      ' . . . . . . . .'
+      ' . . . . . . . .'
+      ' . . . . . . . .'; */
+  }
+}
+
+.tree {
+  grid-area: tree;
+}
+
+.spiral {
+  grid-area: spiral;
+}
+
+.soulSearching {
+  grid-area: soulSearching;
+}
+.moon {
+  grid-area: moon;
+}
+.fish {
+  grid-area: fish;
+}
+.untitled {
+  grid-area: untitled;
+}
+.desk {
+  grid-area: desk;
+}
+.self {
+  grid-area: self;
+}
+.shell {
+  grid-area: shell;
+}
+.city {
+  grid-area: city;
+}
+.bridge {
+  grid-area: bridge;
+}
+.arm {
+  grid-area: arm;
+}
+.kite {
+  grid-area: kite;
+}
+
+.existence {
+  grid-area: existence;
+}
+.searchin {
+  grid-area: searchin;
+}
+.turtle {
+  grid-area: turtle;
+}
+
+.ray {
+  grid-area: ray;
+}
