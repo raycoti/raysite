@@ -1,0 +1,48 @@
+@media screen and (max-width: 500px) {
+  .header {
+    height: 15rem;
+  }
+  #nav {
+    padding-left: 1rem;
+  }
+}
+
+@media screen and (min-width: 501px) and (max-width: 900px) {
+  .header {
+    height: 20rem;
+  }
+  #nav {
+    padding-left: 5rem;
+  }
+}
+@media screen and (min-width: 901px) {
+  .header {
+    height: 25rem;
+  }
+  #nav {
+    padding-left: 5rem;
+  }
+}
+
+#nav {
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: sticky;
+  background-color: #3c3f40;
+  top: 0;
+  z-index: 5;
+}
+
+#nav > a {
+  font-weight: bold;
+  color: #f0feff;
+  padding: 0 5px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+#nav > a.active {
+  color: #42b983;
+}

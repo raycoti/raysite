@@ -13,7 +13,7 @@
 .art-grid {
   display: grid;
   width: 100%;
-  @media (min-width: 80rem) {
+  @media (min-width: 55rem) {
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(24, 1fr);
     grid-gap: 0px;
@@ -42,11 +42,29 @@
       'ray kite kite moon moon moon'
       'ray kite kite moon moon moon'
       'ray . . moon moon moon';
+  }
+  @media (max-width: 55rem) and (min-width: 40rem) {
+    grid-template-columns: repeat(4, 1fr);
+    /* grid-template-rows: repeat(7, 1fr); */
+    grid-gap: 1rem;
+    grid-template-areas:
+      'tree tree self . '
+      'tree tree shell shell '
+      'tree tree shell shell   '
+      'soulSearching soulSearching soulSearching city   '
+      'soulSearching soulSearching soulSearching city ';
+  }
 
-    /* ' . . . . . . . .'
-      ' . . . . . . . .'
-      ' . . . . . . . .'
-      ' . . . . . . . .'; */
+  @media (max-width: 40rem) {
+    grid-template-columns: repeat(4, 1fr);
+    /* grid-template-rows: repeat(7, 1fr); */
+    grid-gap: 1rem;
+    grid-template-areas:
+      'tree tree self . '
+      'tree tree shell shell '
+      'tree tree shell shell   '
+      'soulSearching soulSearching soulSearching city   '
+      'soulSearching soulSearching soulSearching city ';
   }
 }
 

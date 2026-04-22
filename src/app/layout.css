@@ -13,7 +13,6 @@
   background-image: url('/pics/self.png');
   background-repeat: no-repeat;
   background-size: cover;
-  /* // background-position: center; //media query stuff */
   overflow: hidden;
 }
 
@@ -94,13 +93,6 @@
   }
 }
 
-/* @keyframes slide-down-in {
-  from {
-    opacity: 1;
-    top: 0;
-  }
-} */
-
 ::view-transition-old(.no-fade) {
   opacity: 1;
 }
@@ -118,11 +110,6 @@
   animation: 1s ease-in both slide-down-out;
   opacity: 1;
 }
-
-/* ::view-transition-group(.slide-in) {
-  animation: 1s ease-out both slide-down-in;
-  opacity: 1;
-} */
 
 ::view-transition-group(.pulse) {
   animation: smoothTransform 1s ease;

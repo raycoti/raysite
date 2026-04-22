@@ -1,17 +1,37 @@
+'use client';
+
 import Image from 'next/image';
 import {Roboto, Nunito} from 'next/font/google';
 import './styles.css';
+import {useEffect, useState} from 'react';
+import PopOver from './popup';
+
 const nunito = Nunito({subsets: ['latin']});
 const roboto = Roboto({subsets: ['latin']});
 
 const ArtPage = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [currentImage, setCurrentImage] = useState(imageInfoList[0]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className='overflow-scroll h-dvh'>
       <div className='grid-container'>
         <div className='art-grid'>
-          {imageInfo.map(({path, className, name}) => {
+          {imageInfoList.map((imageInfo) => {
+            const {path, className, name} = imageInfo;
             return (
-              <div className={`${className} relative`} key={path}>
+              <div
+                className={`${className} relative cursor-pointer hover:opacity-50`}
+                key={path}
+                onClick={() => {
+                  setShowModal(true);
+                  setCurrentImage(imageInfo);
+                }}
+              >
                 <Image
                   fill
                   objectFit='contain'
@@ -24,6 +44,7 @@ const ArtPage = () => {
           })}
         </div>
       </div>
+      {showModal && <PopOver onClick={() => setShowModal(false)} currentImage={currentImage} />}
     </div>
   );
 };
@@ -54,6 +75,6 @@ const styles = Object.keys(fileNames);
 
 type Names = keyof typeof fileNames;
 
-const imageInfo = styles.map((name) => {
+export const imageInfoList = styles.map((name) => {
   return {path: fileNames[name as Names], className: name as Names, name};
 });

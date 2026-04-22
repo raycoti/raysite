@@ -1,4 +1,5 @@
 import type {Metadata} from 'next';
+import NavBar from './nav';
 import './globals.css';
 import './layout.css';
 
@@ -14,7 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' className={`h-full antialiased`}>
-      <body className=''>{children}</body>
+      <body>
+        <NavBar />
+        {children}
+      </body>
     </html>
   );
 }
