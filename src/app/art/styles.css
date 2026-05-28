@@ -1,4 +1,6 @@
 .grid-container {
+  background-color: #1d1e1e;
+
   display: flex;
   min-height: 85rem;
   /* height: 100%; */
@@ -13,7 +15,7 @@
 .art-grid {
   display: grid;
   width: 100%;
-  @media (min-width: 55rem) {
+  @media (min-width: 49rem) {
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(24, 1fr);
     grid-gap: 0px;
@@ -43,28 +45,29 @@
       'ray kite kite moon moon moon'
       'ray . . moon moon moon';
   }
-  @media (max-width: 55rem) and (min-width: 40rem) {
-    grid-template-columns: repeat(4, 1fr);
-    /* grid-template-rows: repeat(7, 1fr); */
-    grid-gap: 1rem;
-    grid-template-areas:
-      'tree tree self . '
-      'tree tree shell shell '
-      'tree tree shell shell   '
-      'soulSearching soulSearching soulSearching city   '
-      'soulSearching soulSearching soulSearching city ';
-  }
 
-  @media (max-width: 40rem) {
+  @media (max-width: 49rem) {
+    max-width: 33rem;
+    margin-left: auto;
+    margin-right: auto;
+    /* justify-items: center; */
     grid-template-columns: repeat(4, 1fr);
     /* grid-template-rows: repeat(7, 1fr); */
-    grid-gap: 1rem;
+    grid-gap: 0.5rem;
     grid-template-areas:
-      'tree tree self . '
-      'tree tree shell shell '
-      'tree tree shell shell   '
-      'soulSearching soulSearching soulSearching city   '
-      'soulSearching soulSearching soulSearching city ';
+      'soulSearching soulSearching soulSearching soulSearching '
+      'soulSearching soulSearching soulSearching soulSearching '
+      'tree tree kite desk '
+      'tree tree fish fish '
+      'tree tree fish fish '
+      'self self city city   '
+      'self self  city city '
+      'moon moon city city'
+      'moon moon arm bridge '
+      'shell shell shell turtle  '
+      'shell shell shell turtle '
+      'shell shell shell ray '
+      'shell shell shell ray ';
   }
 }
 

@@ -6,18 +6,17 @@ import './nav.css';
 
 const NavBar = () => {
   const pathname = usePathname();
-  console.log(pathname, 'TESTING');
   return (
     <div id='nav'>
-      <Link className={pathname == '/about' ? 'active' : undefined} href='/about'>
-        About
-      </Link>
-      <Link className={pathname == '/art' ? 'active' : undefined} href='/art'>
-        Art
-      </Link>
-      {/* <Link href='/projects'>Projects</Link> */}
+      {paths.map((path) => (
+        <Link key={path} className={pathname == path ? 'active' : undefined} href={path}>
+          {path.replace('/', '').toUpperCase()}
+        </Link>
+      ))}
     </div>
   );
 };
+
+const paths = ['/about', '/art', '/projects'];
 
 export default NavBar;
