@@ -20,7 +20,7 @@ const ArtPage = () => {
   return (
     <div className='overflow-scroll h-dvh'>
       <div className='grid-container'>
-        <div className='art-grid'>
+        <div className='art-grid-1'>
           {imageInfoList.map((imageInfo) => {
             const {path, className, name} = imageInfo;
             return (
@@ -51,6 +51,7 @@ const ArtPage = () => {
 
 export default ArtPage;
 
+// Change to gallery 1 name
 const fileNames = {
   tree: '/art/tree.png',
   spiral: '/art/spiral.jpg',
@@ -68,7 +69,8 @@ const fileNames = {
   existence: '/art/existence.jpg',
   searchin: '/art/searchin.png',
   turtle: '/art/turtle.png',
-  ray: '/art/ray.png'
+  // ray: '/art/ray.png',
+  raySelf: '/art/ray_pose.png'
 } as const;
 
 const styles = Object.keys(fileNames);

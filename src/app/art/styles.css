@@ -12,7 +12,7 @@
   }
 }
 
-.art-grid {
+.art-grid-1 {
   display: grid;
   width: 100%;
   @media (min-width: 49rem) {
@@ -27,9 +27,9 @@
       'tree tree shell spiral spiral city  '
       'tree tree shell spiral spiral city   '
       'tree tree shell spiral spiral city   '
-      'untitled untitled untitled spiral spiral searchin  '
-      'untitled untitled untitled spiral spiral searchin  '
-      'untitled untitled untitled spiral spiral searchin  '
+      'untitled untitled untitled spiral spiral kite  '
+      'untitled untitled untitled spiral spiral kite  '
+      'untitled untitled untitled spiral spiral kite  '
       'untitled untitled untitled bridge self self  '
       'untitled untitled untitled bridge self self  '
       'untitled untitled untitled bridge self self  '
@@ -39,11 +39,17 @@
       'desk arm arm moon moon moon'
       'existence arm arm moon moon moon'
       'existence arm arm moon moon moon'
-      'existence kite kite moon moon moon'
-      'ray kite kite moon moon moon'
-      'ray kite kite moon moon moon'
-      'ray kite kite moon moon moon'
-      'ray . . moon moon moon';
+      'existence raySelf raySelf moon moon moon'
+      'searchin raySelf raySelf moon moon moon'
+      'searchin raySelf raySelf moon moon moon'
+      'searchin raySelf raySelf moon moon moon'
+      '. . . moon moon moon';
+    /* 'raySelf raySelf raySelf . . .'
+      'raySelf raySelf raySelf . . .'
+      'raySelf raySelf raySelf . . .'
+      'raySelf raySelf raySelf . . .'
+      'raySelf raySelf raySelf . . .'; */
+    /* 'raySelf raySelf raySelf raySelf . .'; */
   }
 
   @media (max-width: 49rem) {
@@ -123,6 +129,10 @@
   grid-area: turtle;
 }
 
-.ray {
+/* .ray {
   grid-area: ray;
+} */
+
+.raySelf {
+  grid-area: raySelf;
 }
