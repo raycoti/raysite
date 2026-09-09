@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import {Roboto, Nunito} from 'next/font/google';
 
 const nunito = Nunito({subsets: ['latin']});
@@ -11,7 +11,7 @@ const AboutMePage = () => {
       <div className='flex flex-col sm:flex-row min-h-96 xl:h-3/4 px-8'>
         <div className='min-w-full max-sm:h-full relative min-h-7/8 xl:mr-8'>
           <Image
-            fill
+            layout='fill'
             objectFit='contain'
             objectPosition='center'
             src='/pics/ray_pose.png'
