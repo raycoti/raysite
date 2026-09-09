@@ -11,7 +11,8 @@ const roboto = Roboto({subsets: ['latin']});
 
 const ArtPage = () => {
   const [showModal, setShowModal] = useState(false);
-  const [currentImage, setCurrentImage] = useState(imageInfoList[0]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const currentImage = imageInfoList[currentIndex];
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -21,7 +22,7 @@ const ArtPage = () => {
     <div className='overflow-scroll h-dvh'>
       <div className='grid-container'>
         <div className='art-grid-1'>
-          {imageInfoList.map((imageInfo) => {
+          {imageInfoList.map((imageInfo, index) => {
             const {path, className, name} = imageInfo;
             return (
               <div
@@ -29,22 +30,33 @@ const ArtPage = () => {
                 key={path}
                 onClick={() => {
                   setShowModal(true);
-                  setCurrentImage(imageInfo);
+                  setCurrentIndex(index);
                 }}
               >
                 <Image
                   fill
-                  objectFit='contain'
-                  objectPosition='left center'
+                  // objectFit='contain'
+                  // objectPosition='left center'
                   src={path}
                   alt={name}
+                  // placeholder='blur'
+                  sizes='auto'
                 />
               </div>
             );
           })}
         </div>
       </div>
-      {showModal && <PopOver onClick={() => setShowModal(false)} currentImage={currentImage} />}
+      {showModal && (
+        <PopOver
+          onClick={() => setShowModal(false)}
+          currentImage={currentImage}
+          onNextClick={() => setCurrentIndex((prev) => (prev + 1) % imageInfoList.length)}
+          onPrevClick={() =>
+            setCurrentIndex((prev) => (prev - 1 + imageInfoList.length) % imageInfoList.length)
+          }
+        />
+      )}
     </div>
   );
 };

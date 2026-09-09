@@ -22,3 +22,33 @@
   background-repeat: no-repeat;
   background-position: 50% 50%;
 }
+
+.nav-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 6;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-arrow:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.nav-arrow-prev {
+  left: 16px;
+}
+
+.nav-arrow-next {
+  right: 16px;
+}
