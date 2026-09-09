@@ -1,4 +1,4 @@
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import {Roboto, Nunito} from 'next/font/google';
 
 const nunito = Nunito({subsets: ['latin']});
@@ -11,12 +11,15 @@ const AboutMePage = () => {
       <div className='flex flex-col sm:flex-row min-h-96 xl:h-3/4 px-8'>
         <div className='min-w-full max-sm:h-full relative min-h-7/8 xl:mr-8'>
           <Image
-            layout='fill'
-            objectFit='contain'
-            objectPosition='center'
             src='/pics/ray_pose.png'
             alt='ray self drawing'
             priority
+            fill
+            sizes='100vw'
+            style={{
+              objectFit: 'contain',
+              objectPosition: 'center'
+            }}
           />
         </div>
         <div className='leading-loose rounded-2xl text-left py-4 px12  bg-amber-100 xl:min-w-80 xl:max-w-xl xl:max-h-7/12'>
@@ -32,18 +35,27 @@ const AboutMePage = () => {
           <Image
             width={40}
             height={40}
-            style={{maxWidth: '3rem', width: '100%'}}
             src='/linkedin.png'
             alt='linkedin'
+            style={{
+              maxWidth: '3rem',
+              width: '100%',
+              height: 'auto'
+            }}
           />
         </a>
         <a target='_blank' href='https://github.com/raycoti'>
           <Image
             width={40}
             height={40}
-            style={{maxWidth: '3rem', width: '100%'}}
             src='/github.png'
             alt='github'
+            style={{
+              maxWidth: '3rem',
+              width: '100%',
+              maxWidth: '100%',
+              height: 'auto'
+            }}
           />
         </a>
       </div>

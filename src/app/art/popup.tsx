@@ -1,4 +1,4 @@
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import {useEffect} from 'react';
 import {imageInfoList} from './page';
 import './popover.css';
@@ -37,11 +37,14 @@ const PopOver = ({currentImage, onClick, onNextClick, onPrevClick}: PopOverProps
         &#10094;
       </button>
       <Image
-        layout='fill'
         src={currentImage.path}
         alt={currentImage.name}
-        objectFit='contain'
-        objectPosition='center center'
+        fill
+        sizes='100vw'
+        style={{
+          objectFit: 'contain',
+          objectPosition: 'center center'
+        }}
       />
       <button
         className='nav-arrow nav-arrow-next'

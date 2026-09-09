@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/legacy/image';
+import Image from "next/image";
 import {Roboto, Nunito} from 'next/font/google';
 import './styles.css';
 import {useEffect, useState} from 'react';
@@ -34,14 +34,13 @@ const ArtPage = () => {
                 }}
               >
                 <Image
-                  layout='fill'
                   // objectFit='contain'
                   // objectPosition='left center'
                   src={path}
                   alt={name}
+                  fill
                   // placeholder='blur'
-                  sizes='auto'
-                />
+                  sizes='auto' />
               </div>
             );
           })}
