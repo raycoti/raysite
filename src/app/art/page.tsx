@@ -1,6 +1,6 @@
 'use client';
 
-import Image from "next/image";
+import Image from 'next/image';
 import {Roboto, Nunito} from 'next/font/google';
 import './styles.css';
 import {useEffect, useState} from 'react';
@@ -19,7 +19,7 @@ const ArtPage = () => {
   }, []);
 
   return (
-    <div className='overflow-scroll h-dvh'>
+    <div className='overflow-scroll h-dvh bg-black'>
       <div className='grid-container'>
         <div className='art-grid-1'>
           {imageInfoList.map((imageInfo, index) => {
@@ -33,14 +33,7 @@ const ArtPage = () => {
                   setCurrentIndex(index);
                 }}
               >
-                <Image
-                  // objectFit='contain'
-                  // objectPosition='left center'
-                  src={path}
-                  alt={name}
-                  fill
-                  // placeholder='blur'
-                  sizes='auto' />
+                <Image src={path} alt={name} fill sizes='auto' />
               </div>
             );
           })}

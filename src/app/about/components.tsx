@@ -15,7 +15,7 @@ const AboutMePage = () => {
             alt='ray self drawing'
             priority
             fill
-            sizes='100vw'
+            sizes='auto'
             style={{
               objectFit: 'contain',
               objectPosition: 'center'
@@ -50,10 +50,10 @@ const AboutMePage = () => {
             height={40}
             src='/github.png'
             alt='github'
+            sizes='auto'
             style={{
               maxWidth: '3rem',
               width: '100%',
-              maxWidth: '100%',
               height: 'auto'
             }}
           />
