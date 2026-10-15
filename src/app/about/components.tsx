@@ -1,63 +1,45 @@
 import Image from 'next/image';
-import {Roboto, Nunito} from 'next/font/google';
 
-const nunito = Nunito({subsets: ['latin']});
-const roboto = Roboto({subsets: ['latin']});
+const socialLinks = [
+  {href: 'https://www.linkedin.com/in/raycoti/', icon: '/linkedin.png', label: 'LinkedIn'},
+  {href: 'https://github.com/raycoti', icon: '/github.png', label: 'GitHub'}
+];
 
 const AboutMePage = () => {
   return (
-    <div className='flex flex-col h-dvh items-center mx-auto justify-center max-w-7xl'>
-      <h1 className={`${nunito.className}  text-4xl capitalize mb-10`}>About me</h1>
-      <div className='flex flex-col sm:flex-row min-h-96 xl:h-3/4 px-8'>
-        <div className='min-w-full max-sm:h-full relative min-h-7/8 xl:mr-8'>
+    <div className='mx-auto flex h-dvh max-w-7xl flex-col items-center justify-center'>
+      <h1 className='mb-10 font-heading text-4xl capitalize'>About me</h1>
+      <div className='flex min-h-96 flex-col px-8 sm:flex-row xl:h-3/4'>
+        <div className='relative min-h-7/8 min-w-full max-sm:h-full xl:mr-8'>
           <Image
             src='/pics/ray_pose.png'
-            alt='ray self drawing'
-            priority
+            alt='Self-portrait drawing of Ray'
+            preload
             fill
-            sizes='auto'
-            style={{
-              objectFit: 'contain',
-              objectPosition: 'center'
-            }}
+            sizes='(min-width: 640px) 50vw, 100vw'
+            className='object-contain object-center'
           />
         </div>
-        <div className='leading-loose rounded-2xl text-left py-4 px12  bg-amber-100 xl:min-w-80 xl:max-w-xl xl:max-h-7/12'>
-          <p className={`${roboto.className} m-0 indent-10 py-4 px-7`}>
+        <div className='rounded-2xl bg-amber-100 px-12 py-4 text-left leading-loose xl:max-h-7/12 xl:max-w-xl xl:min-w-80'>
+          <p className='m-0 px-7 py-4 indent-10 font-body'>
             Howdy y&apos;all! I am a Frontend developer with 8+ years of frontend developer
-            experience who specializes in Typescript and React. When I&apos;m not working i&apos;m
+            experience who specializes in Typescript and React. When I&apos;m not working I&apos;m
             either cooking up some food, dancing or working on an art project
           </p>
         </div>
       </div>
-      <div className='w-full flex justify-center gap-12 mt-10'>
-        <a target='_blank' href='https://www.linkedin.com/in/raycoti/'>
-          <Image
-            width={40}
-            height={40}
-            src='/linkedin.png'
-            alt='linkedin'
-            style={{
-              maxWidth: '3rem',
-              width: '100%',
-              height: 'auto'
-            }}
-          />
-        </a>
-        <a target='_blank' href='https://github.com/raycoti'>
-          <Image
-            width={40}
-            height={40}
-            src='/github.png'
-            alt='github'
-            sizes='auto'
-            style={{
-              maxWidth: '3rem',
-              width: '100%',
-              height: 'auto'
-            }}
-          />
-        </a>
+      <div className='mt-10 flex w-full justify-center gap-12'>
+        {socialLinks.map(({href, icon, label}) => (
+          <a key={href} href={href} target='_blank' rel='noopener noreferrer'>
+            <Image
+              width={40}
+              height={40}
+              src={icon}
+              alt={label}
+              className='h-auto w-full max-w-12'
+            />
+          </a>
+        ))}
       </div>
     </div>
   );

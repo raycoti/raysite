@@ -4,19 +4,27 @@ import Link from 'next/link';
 
 import './nav.css';
 
+const paths = ['/about', '/art', '/projects'];
+
 const NavBar = () => {
   const pathname = usePathname();
   return (
-    <div id='nav'>
-      {paths.map((path) => (
-        <Link key={path} className={pathname == path ? 'active' : undefined} href={path}>
-          {path.replace('/', '').toUpperCase()}
-        </Link>
-      ))}
-    </div>
+    <nav id='nav'>
+      {paths.map((path) => {
+        const isActive = pathname === path;
+        return (
+          <Link
+            key={path}
+            className={isActive ? 'active' : undefined}
+            aria-current={isActive ? 'page' : undefined}
+            href={path}
+          >
+            {path.replace('/', '')}
+          </Link>
+        );
+      })}
+    </nav>
   );
 };
-
-const paths = ['/about', '/art', '/projects'];
 
 export default NavBar;

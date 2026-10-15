@@ -23,6 +23,26 @@
   background-position: 50% 50%;
 }
 
+.popover-content {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.popover-image-column {
+  position: relative;
+  flex: 1;
+  height: 100%;
+}
+
+.popover-description-column {
+  flex: 1;
+  height: 100%;
+  overflow-y: auto;
+  background-color: #fff;
+  padding: 16px;
+}
+
 .nav-arrow {
   position: fixed;
   top: 50%;

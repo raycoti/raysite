@@ -1,53 +1,74 @@
 'use client';
 
 import {useState} from 'react';
-import {Nunito} from 'next/font/google';
 import ProjectItem from './projectItem';
-
-const nunito = Nunito({subsets: ['latin']});
-
-const projectNameInfo = {
-  interactiveNarrative: {
-    name: 'Interactive Narative',
-    description: `This project is a "walking simulator that takes players on my journey as a first-generation student travelling away for college. The story is told through interactable snippets and visual metaphors. The project was originally built with multiple users in mind (via networking and matchmaking) and I used that to disrupt the control of my own narrative. I did this by having the snippets cycle one sentence at a time, rather than be shown in full. This meant that the last sentence a user reads, would become the first sentence the next user reads.
-Thus, as more people interact with the environment the more mixed up the story would become. The project was built using Unity 3D,
-Maya3D, and Blender.`,
-    image: ''
-  }
-} as const;
-
-type ProjectNames = keyof typeof projectNameInfo;
+import {
+  categoryTabs,
+  professionalOverview,
+  projectInfoByCategory,
+  type ProjectCategory
+} from './projectInfo';
 
 const ProjectsPage = () => {
-  const [selectedProject, setSelectedProject] = useState<ProjectNames | null>(null);
+  const [activeCategory, setActiveCategory] = useState<ProjectCategory>('personal');
+  const [selectedProjectKey, setSelectedProjectKey] = useState<string | null>(null);
+
+  const currentProjectInfo = projectInfoByCategory[activeCategory];
+  const selectedProject = selectedProjectKey ? currentProjectInfo[selectedProjectKey] : undefined;
+
+  const handleCategoryChange = (category: ProjectCategory) => {
+    setActiveCategory(category);
+    setSelectedProjectKey(null);
+  };
 
   return (
     <div className='flex flex-col p-8'>
-      <h1 className={`${nunito.className} text-4xl capitalize mb-8`}>Projects</h1>
-      <div className='flex flex-col sm:flex-row gap-8'>
+      <h1 className='mb-8 font-heading text-4xl capitalize'>Projects</h1>
+
+      <div role='tablist' className='mb-6 flex gap-6 border-b border-amber-200'>
+        {categoryTabs.map(({key, label}) => (
+          <button
+            key={key}
+            type='button'
+            role='tab'
+            aria-selected={activeCategory === key}
+            onClick={() => handleCategoryChange(key)}
+            className={`-mb-px cursor-pointer pb-2 font-heading text-lg ${
+              activeCategory === key
+                ? 'border-b-2 border-amber-500 font-bold'
+                : 'text-gray-500 hover:text-black'
+            }`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {activeCategory === 'professional' && (
+        <p className='mb-8 max-w-2xl font-body leading-relaxed'>{professionalOverview}</p>
+      )}
+
+      <div className='flex flex-col gap-8 sm:flex-row'>
         <ul className='flex flex-col gap-2'>
-          {Object.keys(projectNameInfo).map((key) => {
-            const projectKey = key as ProjectNames;
-            return (
-              <li key={projectKey}>
-                <button
-                  type='button'
-                  className={`${nunito.className} capitalize text-left hover:underline cursor-pointer ${
-                    selectedProject === projectKey ? 'font-bold' : ''
-                  }`}
-                  onClick={() => setSelectedProject(projectKey)}
-                >
-                  {projectNameInfo[projectKey].name}
-                </button>
-              </li>
-            );
-          })}
+          {Object.entries(currentProjectInfo).map(([key, project]) => (
+            <li key={key}>
+              <button
+                type='button'
+                className={`cursor-pointer text-left font-heading capitalize hover:underline ${
+                  selectedProjectKey === key ? 'font-bold' : ''
+                }`}
+                onClick={() => setSelectedProjectKey(key)}
+              >
+                {project.name}
+              </button>
+            </li>
+          ))}
         </ul>
         {selectedProject && (
           <ProjectItem
-            name={projectNameInfo[selectedProject].name}
-            description={projectNameInfo[selectedProject].description}
-            imagePath={projectNameInfo[selectedProject].image}
+            name={selectedProject.name}
+            description={selectedProject.description}
+            imagePath={selectedProject.image}
           />
         )}
       </div>
@@ -56,7 +77,3 @@ const ProjectsPage = () => {
 };
 
 export default ProjectsPage;
-
-export const projectList = Object.keys(projectNameInfo).map((projectName) => {
-  return projectNameInfo[projectName as ProjectNames];
-});

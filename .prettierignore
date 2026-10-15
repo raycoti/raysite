@@ -1,0 +1,7 @@
+.next
+out
+build
+public
+package-lock.json
+yarn.lock
+AGENTS.md

@@ -1,8 +1,4 @@
 import Image from 'next/image';
-import {Roboto, Nunito} from 'next/font/google';
-
-const nunito = Nunito({subsets: ['latin']});
-const roboto = Roboto({subsets: ['latin']});
 
 interface ProjectItemProps {
   name: string;
@@ -12,24 +8,21 @@ interface ProjectItemProps {
 
 const ProjectItem = ({name, description, imagePath}: ProjectItemProps) => {
   return (
-    <div className='flex flex-col rounded-2xl overflow-hidden shadow-lg bg-amber-100 max-w-sm'>
+    <div className='flex max-w-sm flex-col overflow-hidden rounded-2xl bg-amber-100 shadow-lg'>
       {imagePath && (
-        <div className='relative w-full h-56'>
+        <div className='relative h-56 w-full'>
           <Image
             src={imagePath}
             alt={name}
             fill
-            sizes='auto'
-            style={{
-              objectFit: 'cover',
-              objectPosition: 'center'
-            }}
+            sizes='24rem'
+            className='object-cover object-center'
           />
         </div>
       )}
       <div className='p-6'>
-        <h2 className={`${nunito.className} text-2xl capitalize mb-2`}>{name}</h2>
-        <p className={`${roboto.className} leading-relaxed`}>{description}</p>
+        <h2 className='mb-2 font-heading text-2xl capitalize'>{name}</h2>
+        <p className='font-body leading-relaxed'>{description}</p>
       </div>
     </div>
   );

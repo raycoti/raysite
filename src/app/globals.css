@@ -1,1 +1,6 @@
 @import 'tailwindcss';
+
+@theme inline {
+  --font-heading: var(--font-nunito);
+  --font-body: var(--font-roboto);
+}
