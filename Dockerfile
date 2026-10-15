@@ -14,6 +14,7 @@ RUN --mount=type=cache,target=/root/.npm npm ci
 FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+ENV NEXT_OUTPUT=standalone
 RUN npm run build
 
 # Minimal runtime image using Next's standalone output (see next.config.ts).

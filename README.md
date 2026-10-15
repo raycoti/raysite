@@ -27,6 +27,20 @@ npm run docker:run
 
 Then open [http://localhost:3000](http://localhost:3000).
 
+## Deploy to Heroku
+
+The site deploys to the `raycoti` Heroku app with the Node.js buildpack. Heroku installs
+dependencies, runs `npm run build`, then starts `next start` (see `Procfile`) on `$PORT`.
+The Node version comes from `engines.node` in `package.json`.
+
+```bash
+heroku login
+heroku git:remote -a raycoti
+git push heroku main
+```
+
+Roll back with `heroku releases:rollback -a raycoti`.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

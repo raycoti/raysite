@@ -2,6 +2,9 @@
   "name": "raysite",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "26.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -16,7 +19,6 @@
   },
   "dependencies": {
     "next": "16.2.2",
-    "node": "^26.8.1",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
@@ -33,5 +35,8 @@
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4",
     "typescript": "^5"
-  }
+  },
+  "cacheDirectories": [
+    ".next/cache"
+  ]
 }
