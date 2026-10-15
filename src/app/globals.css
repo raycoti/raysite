@@ -4,3 +4,20 @@
   --font-heading: var(--font-nunito);
   --font-body: var(--font-roboto);
 }
+
+/* Site palette: use as bg-page, bg-card, bg-card-tint, border-card-border, text-ink, border-accent,
+   shadow-card. `static` always emits the variables so plain CSS files can use var(--color-*). */
+@theme static {
+  --color-page: #f4f1f8;
+  --color-card: #ffffff;
+  --color-card-tint: #eee9f6;
+  --color-card-border: #e4dcef;
+  --color-ink: #2c2340;
+  --color-accent: #7c5fb0;
+  --shadow-card: 0 1px 3px rgb(44 35 64 / 0.08);
+}
+
+body {
+  background-color: var(--color-page);
+  color: var(--color-ink);
+}

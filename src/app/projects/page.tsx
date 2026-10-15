@@ -14,7 +14,9 @@ const ProjectsPage = () => {
   const [selectedProjectKey, setSelectedProjectKey] = useState<string | null>(null);
 
   const currentProjectInfo = projectInfoByCategory[activeCategory];
-  const selectedProject = selectedProjectKey ? currentProjectInfo[selectedProjectKey] : undefined;
+  // Show the category's first project until one is picked.
+  const activeProjectKey = selectedProjectKey ?? Object.keys(currentProjectInfo)[0];
+  const selectedProject = activeProjectKey ? currentProjectInfo[activeProjectKey] : undefined;
 
   const handleCategoryChange = (category: ProjectCategory) => {
     setActiveCategory(category);
@@ -25,7 +27,7 @@ const ProjectsPage = () => {
     <div className='flex flex-col p-8'>
       <h1 className='mb-8 font-heading text-4xl capitalize'>Projects</h1>
 
-      <div role='tablist' className='mb-6 flex gap-6 border-b border-amber-200'>
+      <div role='tablist' className='mb-6 flex gap-6 border-b border-card-border'>
         {categoryTabs.map(({key, label}) => (
           <button
             key={key}
@@ -35,8 +37,8 @@ const ProjectsPage = () => {
             onClick={() => handleCategoryChange(key)}
             className={`-mb-px cursor-pointer pb-2 font-heading text-lg ${
               activeCategory === key
-                ? 'border-b-2 border-amber-500 font-bold'
-                : 'text-gray-500 hover:text-black'
+                ? 'border-b-2 border-accent font-bold'
+                : 'text-ink/60 hover:text-ink'
             }`}
           >
             {label}
@@ -45,7 +47,9 @@ const ProjectsPage = () => {
       </div>
 
       {activeCategory === 'professional' && (
-        <p className='mb-8 max-w-2xl font-body leading-relaxed'>{professionalOverview}</p>
+        <div className='mb-8 max-w-2xl rounded-2xl border border-card-border bg-card-tint px-6 py-4 shadow-card'>
+          <p className='font-body leading-relaxed'>{professionalOverview}</p>
+        </div>
       )}
 
       <div className='flex flex-col gap-8 sm:flex-row'>
@@ -55,7 +59,7 @@ const ProjectsPage = () => {
               <button
                 type='button'
                 className={`cursor-pointer text-left font-heading capitalize hover:underline ${
-                  selectedProjectKey === key ? 'font-bold' : ''
+                  activeProjectKey === key ? 'font-bold' : ''
                 }`}
                 onClick={() => setSelectedProjectKey(key)}
               >

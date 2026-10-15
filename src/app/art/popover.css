@@ -31,7 +31,7 @@
 
 .popover-image-column {
   position: relative;
-  flex: 1;
+  flex: 3;
   height: 100%;
 }
 
@@ -39,16 +39,27 @@
   flex: 1;
   height: 100%;
   overflow-y: auto;
-  background-color: #fff;
   padding: 16px;
 }
 
+.popover-description-card {
+  box-sizing: border-box;
+  min-height: 100%;
+  padding: 16px 20px;
+  border: 1px solid var(--color-card-border);
+  border-radius: 16px;
+  background-color: var(--color-card-tint);
+  color: var(--color-ink);
+  line-height: 1.6;
+  cursor: auto;
+}
+
 .nav-arrow {
-  position: fixed;
+  position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 6;
-  background: rgba(255, 255, 255, 0.15);
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.4);
   color: #fff;
   border: none;
   border-radius: 50%;
@@ -62,7 +73,7 @@
 }
 
 .nav-arrow:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .nav-arrow-prev {
@@ -71,4 +82,23 @@
 
 .nav-arrow-next {
   right: 16px;
+}
+
+/* Phones and tablets in portrait, plus touch tablets up to 13" iPad Pro landscape */
+@media (max-width: 1032px), (max-width: 1376px) and (pointer: coarse) {
+  .popover-content {
+    flex-direction: column;
+  }
+
+  .popover-image-column {
+    flex: 2;
+    height: auto;
+    min-height: 0;
+  }
+
+  .popover-description-column {
+    flex: 1;
+    height: auto;
+    min-height: 0;
+  }
 }
