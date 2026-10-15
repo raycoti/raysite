@@ -10,7 +10,9 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "docker:build": "docker build -t raysite .",
+    "docker:run": "docker run --rm -p 3000:3000 raysite"
   },
   "dependencies": {
     "next": "16.2.2",
