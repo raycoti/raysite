@@ -16,9 +16,14 @@ interface PopOverProps {
   onPrevClick: () => void;
 }
 
-// Shared by the popup image and the background preloads, so both request the same file.
-const POPUP_IMAGE_SIZES =
-  '(max-width: 1032px) 100vw, (max-width: 1376px) and (pointer: coarse) 100vw, 75vw';
+const hasDescription = (image: ImageInfo) => image.description.trim() !== '';
+
+// Width hint for the popup image: full width when there's no description column. Shared by the
+// popup image and the background preloads, so both request the same file.
+const popupImageSizes = (image: ImageInfo) =>
+  hasDescription(image)
+    ? '(max-width: 1032px) 100vw, (max-width: 1376px) and (pointer: coarse) 100vw, 75vw'
+    : '100vw';
 
 const PopOver = ({
   currentImage,
@@ -31,6 +36,7 @@ const PopOver = ({
 }: PopOverProps) => {
   const [loadedPath, setLoadedPath] = useState<string | null>(null);
   const isLoading = loadedPath !== currentImage.path;
+  const showDescription = hasDescription(currentImage);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const titleId = useId();
@@ -50,8 +56,13 @@ const PopOver = ({
 
   // Start downloading the neighbors at the size the popup will show them.
   useEffect(() => {
-    adjacentImages.forEach(({path}) => {
-      const {props} = getImageProps({src: path, alt: '', fill: true, sizes: POPUP_IMAGE_SIZES});
+    adjacentImages.forEach((image) => {
+      const {props} = getImageProps({
+        src: image.path,
+        alt: '',
+        fill: true,
+        sizes: popupImageSizes(image)
+      });
       preload(props.src, {as: 'image', imageSrcSet: props.srcSet, imageSizes: props.sizes});
     });
   }, [adjacentImages]);
@@ -113,7 +124,7 @@ const PopOver = ({
             alt={currentImage.title}
             fill
             loading='eager'
-            sizes={POPUP_IMAGE_SIZES}
+            sizes={popupImageSizes(currentImage)}
             onLoad={() => setLoadedPath(currentImage.path)}
             className={`object-contain object-center transition-opacity duration-300 ${
               isLoading ? 'opacity-0' : 'opacity-100'
@@ -131,15 +142,23 @@ const PopOver = ({
             &#10095;
           </button>
         </div>
-        <div className='popover-description-column'>
-          {/* Stop clicks here from closing the popup, so the text can be read and selected. */}
-          <div className='popover-description-card' onClick={(event) => event.stopPropagation()}>
-            <h2 id={titleId} className='mb-3 font-heading text-2xl'>
-              {currentImage.title}
-            </h2>
-            {currentImage.description && <p className='font-body'>{currentImage.description}</p>}
+        {/* Without a description the column is skipped and the image fills the width, centered.
+            The title stays for screen readers, since it names the dialog. */}
+        {showDescription ? (
+          <div className='popover-description-column'>
+            {/* Stop clicks here from closing the popup, so the text can be read and selected. */}
+            <div className='popover-description-card' onClick={(event) => event.stopPropagation()}>
+              <h2 id={titleId} className='mb-3 font-heading text-2xl'>
+                {currentImage.title}
+              </h2>
+              <p className='font-body'>{currentImage.description}</p>
+            </div>
           </div>
-        </div>
+        ) : (
+          <h2 id={titleId} className='sr-only'>
+            {currentImage.title}
+          </h2>
+        )}
       </div>
       {/* Announces the new image to screen readers when using the arrows. */}
       <p className='sr-only' aria-live='polite'>
