@@ -17,7 +17,12 @@ const artImages = {
   searchin: {path: '/art/searchin.webp', name: 'searchin', description: ''},
   turtle: {path: '/art/turtle.webp', name: 'turtle', description: ''},
   // ray: {path: '/art/ray.webp', name: 'ray', description: ''},
-  raySelf: {path: '/art/ray_pose.webp', name: 'raySelf', description: 'afdafa'}
+  raySelf: {
+    path: '/art/ray_pose.webp',
+    name: 'raySelf',
+    description:
+      'Created in Blender, importing 4 procreate drawings I made, and a model of a train underpass.'
+  }
 } as const;
 
 type ArtImageKey = keyof typeof artImages;

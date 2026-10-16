@@ -78,7 +78,6 @@
 
 .popover-description-card {
   box-sizing: border-box;
-  min-height: 100%;
   padding: 16px 20px;
   border: 1px solid var(--color-card-border);
   border-radius: 16px;
@@ -124,16 +123,24 @@
     flex-direction: column;
   }
 
+  /* The image takes all the height the description doesn't need, and sits at the bottom of its
+     area so there's no gap above the description card. */
   .popover-image-column {
-    flex: 2;
+    flex: 1 1 0;
     height: auto;
     min-height: 0;
   }
 
+  .popover-image-column img {
+    object-position: center bottom;
+  }
+
+  /* Only as tall as its text; long descriptions scroll instead of squeezing the image. */
   .popover-description-column {
-    flex: 1;
+    flex: 0 0 auto;
     height: auto;
-    min-height: 0;
+    max-height: 40%;
+    padding-top: 12px;
   }
 }
 
