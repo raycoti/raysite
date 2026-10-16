@@ -11,7 +11,7 @@ import {
 } from './projectInfo';
 
 const ProjectsPage = () => {
-  const [activeCategory, setActiveCategory] = useState<ProjectCategory>('personal');
+  const [activeCategory, setActiveCategory] = useState<ProjectCategory>('professional');
   const [selectedProjectKey, setSelectedProjectKey] = useState<string | null>(null);
 
   const currentProjectInfo = projectInfoByCategory[activeCategory];

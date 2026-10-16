@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import './nav.css';
 
-const paths = ['/about', '/art', '/projects'];
+const paths = ['/about', '/projects', '/art'];
 
 const NavBar = () => {
   const pathname = usePathname();

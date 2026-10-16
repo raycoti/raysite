@@ -53,6 +53,6 @@ export const projectInfoByCategory: Record<ProjectCategory, Record<string, Proje
 };
 
 export const categoryTabs: {key: ProjectCategory; label: string}[] = [
-  {key: 'personal', label: 'Personal Projects'},
-  {key: 'professional', label: 'Professional Work'}
+  {key: 'professional', label: 'Professional Work'},
+  {key: 'personal', label: 'Personal Projects'}
 ];

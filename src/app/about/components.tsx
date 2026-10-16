@@ -10,9 +10,9 @@ const AboutMePage = () => {
     <div className='mx-auto flex max-w-7xl flex-col items-center pt-6 pb-10'>
       <h1 className='mb-6 font-heading text-4xl capitalize'>About me</h1>
       <div className='flex w-full flex-col items-center gap-8 px-8'>
-        <div className='relative aspect-[3/2] w-full max-w-3xl'>
+        <div className='relative aspect-3/2 w-full max-w-3xl'>
           <Image
-            src='/pics/ray_pose.webp'
+            src='/pics/ray-portrait.jpeg'
             alt='Self-portrait drawing of Ray'
             preload
             fill
@@ -22,9 +22,9 @@ const AboutMePage = () => {
         </div>
         <div className='w-full max-w-3xl rounded-2xl border border-card-border bg-card px-6 py-4 text-left leading-loose shadow-card sm:px-12'>
           <p className='m-0 py-4 indent-10 font-body sm:px-7'>
-            Howdy y&apos;all! I am a Frontend developer with 8+ years of frontend developer
-            experience who specializes in Typescript and React. When I&apos;m not working I&apos;m
-            either cooking up some food, dancing or working on an art project
+            Hello! I am a Software Engineer with 8+ years of Frontend development experience. I
+            specialize in Typescript and React. When I&apos;m not working I&apos;m either cooking up
+            some food, dancing or working on an art project. This website was built using Next.js
           </p>
         </div>
       </div>
