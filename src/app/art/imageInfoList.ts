@@ -22,7 +22,8 @@ const artImages = {
     name: 'raySelf',
     description:
       'Created in Blender, importing 4 procreate drawings I made, and a model of a train underpass.'
-  }
+  },
+  rayDrawing: {path: '/art/ray-drawing.webp', name: 'rayDrawing', description: ''}
 } as const;
 
 type ArtImageKey = keyof typeof artImages;

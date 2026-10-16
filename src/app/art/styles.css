@@ -2,7 +2,11 @@
   background-color: #1d1e1e;
 
   display: flex;
-  min-height: 85rem;
+  /* Grows with the row count so each row keeps the same height. */
+  min-height: 94rem;
+  @media (min-width: 49rem) {
+    min-height: 113rem;
+  }
   /* height: 100%; */
   margin: auto;
   overflow: hidden;
@@ -17,7 +21,7 @@
   width: 100%;
   @media (min-width: 49rem) {
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(24, 1fr);
+    grid-template-rows: repeat(32, 1fr);
     grid-gap: 0px;
     grid-template-areas:
       'tree tree soulSearching soulSearching soulSearching fish  '
@@ -39,11 +43,19 @@
       'desk arm arm moon moon moon'
       'existence arm arm moon moon moon'
       'existence arm arm moon moon moon'
-      'existence raySelf raySelf moon moon moon'
-      'searchin raySelf raySelf moon moon moon'
-      'searchin raySelf raySelf moon moon moon'
-      'searchin raySelf raySelf moon moon moon'
-      '. . . moon moon moon';
+      'existence searchin searchin moon moon moon'
+      'existence searchin searchin moon moon moon'
+      '. searchin searchin moon moon moon'
+      '. searchin searchin moon moon moon'
+      '. searchin searchin moon moon moon'
+      'raySelf raySelf raySelf raySelf rayDrawing rayDrawing'
+      'raySelf raySelf raySelf raySelf rayDrawing rayDrawing'
+      'raySelf raySelf raySelf raySelf rayDrawing rayDrawing'
+      'raySelf raySelf raySelf raySelf rayDrawing rayDrawing'
+      'raySelf raySelf raySelf raySelf rayDrawing rayDrawing'
+      'raySelf raySelf raySelf raySelf rayDrawing rayDrawing'
+      'raySelf raySelf raySelf raySelf rayDrawing rayDrawing'
+      'raySelf raySelf raySelf raySelf rayDrawing rayDrawing';
     /* 'raySelf raySelf raySelf . . .'
       'raySelf raySelf raySelf . . .'
       'raySelf raySelf raySelf . . .'
@@ -75,8 +87,10 @@
       'shell shell shell turtle'
       'shell shell shell existence'
       'shell shell shell searchin'
-      'spiral spiral untitled untitled'
-      'spiral spiral untitled untitled'
+      'spiral spiral rayDrawing rayDrawing'
+      'spiral spiral rayDrawing rayDrawing'
+      'untitled untitled rayDrawing rayDrawing'
+      'untitled untitled rayDrawing rayDrawing'
       'raySelf raySelf raySelf raySelf'
       'raySelf raySelf raySelf raySelf'
       'raySelf raySelf raySelf raySelf';
@@ -141,4 +155,8 @@
 
 .raySelf {
   grid-area: raySelf;
+}
+
+.rayDrawing {
+  grid-area: rayDrawing;
 }
