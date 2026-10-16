@@ -1,13 +1,10 @@
 'use client';
 
 import Image from 'next/image';
-import {Roboto, Nunito} from 'next/font/google';
 import './styles.css';
 import {useEffect, useState} from 'react';
 import PopOver from './popup';
-
-const nunito = Nunito({subsets: ['latin']});
-const roboto = Roboto({subsets: ['latin']});
+import {imageInfoList} from './imageInfoList';
 
 const ArtPage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -19,30 +16,32 @@ const ArtPage = () => {
   }, []);
 
   return (
-    <div className='overflow-scroll h-dvh bg-black'>
+    <div className='h-dvh overflow-scroll bg-black'>
+      <h1 className='sr-only'>Art gallery</h1>
       <div className='grid-container'>
         <div className='art-grid-1'>
-          {imageInfoList.map((imageInfo, index) => {
-            const {path, className, name} = imageInfo;
-            return (
-              <div
-                className={`${className} relative cursor-pointer hover:opacity-50`}
-                key={path}
-                onClick={() => {
-                  setShowModal(true);
-                  setCurrentIndex(index);
-                }}
-              >
-                <Image src={path} alt={name} fill sizes='auto' />
-              </div>
-            );
-          })}
+          {imageInfoList.map(({path, className, title}, index) => (
+            <button
+              type='button'
+              className={`${className} relative cursor-pointer hover:opacity-50 focus-visible:z-10 focus-visible:outline-4 focus-visible:-outline-offset-4 focus-visible:outline-white`}
+              key={path}
+              aria-label={`View ${title}`}
+              onClick={() => {
+                setShowModal(true);
+                setCurrentIndex(index);
+              }}
+            >
+              <Image src={path} alt='' fill sizes='(min-width: 49rem) 33vw, 50vw' />
+            </button>
+          ))}
         </div>
       </div>
       {showModal && (
         <PopOver
-          onClick={() => setShowModal(false)}
+          onClose={() => setShowModal(false)}
           currentImage={currentImage}
+          index={currentIndex}
+          total={imageInfoList.length}
           onNextClick={() => setCurrentIndex((prev) => (prev + 1) % imageInfoList.length)}
           onPrevClick={() =>
             setCurrentIndex((prev) => (prev - 1 + imageInfoList.length) % imageInfoList.length)
@@ -54,33 +53,3 @@ const ArtPage = () => {
 };
 
 export default ArtPage;
-
-// Change to gallery 1 name
-const fileNames = {
-  tree: '/art/tree.png',
-  spiral: '/art/spiral.jpg',
-  soulSearching: '/art/soulSearching.jpg',
-  moon: '/art/moon.png',
-  fish: '/art/fish.png',
-  untitled: '/art/Untitled.png',
-  desk: '/art/desk.png',
-  self: '/art/self.png',
-  shell: '/art/shell.png',
-  city: `/art/city.jpg`,
-  bridge: '/art/bridge.png',
-  arm: '/art/arm.png',
-  kite: '/art/kite.png',
-  existence: '/art/existence.jpg',
-  searchin: '/art/searchin.png',
-  turtle: '/art/turtle.png',
-  // ray: '/art/ray.png',
-  raySelf: '/art/ray_pose.png'
-} as const;
-
-const styles = Object.keys(fileNames);
-
-type Names = keyof typeof fileNames;
-
-export const imageInfoList = styles.map((name) => {
-  return {path: fileNames[name as Names], className: name as Names, name};
-});

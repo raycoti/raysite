@@ -1,18 +1,52 @@
+/* Full-screen modal <dialog>; resets the browser's default dialog box styles. */
 .overlay {
-  display: flex;
-  justify-content: center;
   position: fixed;
-  background-color: rgba(1, 1, 1, 0.5);
+  inset: 0;
   width: 100%;
   height: 100%;
-  max-height: 100vh;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 5;
-
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: rgba(1, 1, 1, 0.5);
+  color: inherit;
   cursor: pointer;
+}
+
+.overlay[open] {
+  display: flex;
+  justify-content: center;
+}
+
+.overlay::backdrop {
+  background: transparent;
+}
+
+.popover-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.popover-close:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* White rings show on both the dark overlay and the artwork. */
+.overlay button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.6);
 }
 
 .overlay > .imageContainer {
@@ -23,12 +57,43 @@
   background-position: 50% 50%;
 }
 
+.popover-content {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.popover-image-column {
+  position: relative;
+  flex: 3;
+  height: 100%;
+}
+
+.popover-description-column {
+  flex: 1;
+  height: 100%;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.popover-description-card {
+  box-sizing: border-box;
+  min-height: 100%;
+  padding: 16px 20px;
+  border: 1px solid var(--color-card-border);
+  border-radius: 16px;
+  background-color: var(--color-card-tint);
+  color: var(--color-ink);
+  line-height: 1.6;
+  cursor: auto;
+}
+
 .nav-arrow {
-  position: fixed;
+  position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 6;
-  background: rgba(255, 255, 255, 0.15);
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.4);
   color: #fff;
   border: none;
   border-radius: 50%;
@@ -42,7 +107,7 @@
 }
 
 .nav-arrow:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .nav-arrow-prev {
@@ -51,4 +116,23 @@
 
 .nav-arrow-next {
   right: 16px;
+}
+
+/* Phones and tablets in portrait, plus touch tablets up to 13" iPad Pro landscape */
+@media (max-width: 1032px), (max-width: 1376px) and (pointer: coarse) {
+  .popover-content {
+    flex-direction: column;
+  }
+
+  .popover-image-column {
+    flex: 2;
+    height: auto;
+    min-height: 0;
+  }
+
+  .popover-description-column {
+    flex: 1;
+    height: auto;
+    min-height: 0;
+  }
 }

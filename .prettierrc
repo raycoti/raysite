@@ -6,5 +6,6 @@
   "singleQuote": true,
   "tabWidth": 2,
   "trailingComma": "none",
-  "tailwindConfig": "./app/globals.css"
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "tailwindStylesheet": "./src/app/globals.css"
 }

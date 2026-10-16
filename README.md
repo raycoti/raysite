@@ -5,20 +5,41 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 First, run the development server:
 
 ```bash
+nvm install
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You can start editing the page by modifying `src/app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Docker
+
+The production image uses Next's standalone output. With [Docker Desktop](https://www.docker.com/products/docker-desktop/) running:
+
+```bash
+npm run docker:build
+npm run docker:run
+```
+
+Then open [http://localhost:3000](http://localhost:3000).
+
+## Deploy to Heroku
+
+The site deploys to the `raycoti` Heroku app with the Node.js buildpack. Heroku installs
+dependencies, runs `npm run build`, then starts `next start` (see `Procfile`) on `$PORT`.
+The Node version comes from `engines.node` in `package.json`.
+
+```bash
+heroku login
+heroku git:remote -a raycoti
+git push heroku main
+```
+
+Roll back with `heroku releases:rollback -a raycoti`.
 
 ## Learn More
 

@@ -1,8 +1,8 @@
-.container {
+.home-container {
   color: #2c3e50;
 }
 
-.container::after {
+.home-container::after {
   content: '';
   position: absolute;
   top: 0;
@@ -44,7 +44,7 @@
 }
 
 @media only screen and (max-width: 599px) {
-  .container {
+  .home-container {
     h1 {
       font-size: 2rem;
       font-weight: bold;
@@ -55,7 +55,7 @@
     }
   }
 
-  .container::after {
+  .home-container::after {
     background-image: url('/pics/tree.png');
     background-position: center;
   }
