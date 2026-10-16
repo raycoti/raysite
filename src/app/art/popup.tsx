@@ -1,5 +1,6 @@
-import Image from 'next/image';
-import {useEffect, useId, useRef} from 'react';
+import Image, {getImageProps} from 'next/image';
+import {useEffect, useId, useRef, useState} from 'react';
+import {preload} from 'react-dom';
 import type {ImageInfo} from './imageInfoList';
 import './popover.css';
 
@@ -8,12 +9,28 @@ interface PopOverProps {
   /** Position of the current image, for the "image 3 of 17" announcement. */
   index: number;
   total: number;
+  /** The previous and next images, downloaded in the background so the arrows feel instant. */
+  adjacentImages: ImageInfo[];
   onClose: () => void;
   onNextClick: () => void;
   onPrevClick: () => void;
 }
 
-const PopOver = ({currentImage, index, total, onClose, onNextClick, onPrevClick}: PopOverProps) => {
+// Shared by the popup image and the background preloads, so both request the same file.
+const POPUP_IMAGE_SIZES =
+  '(max-width: 1032px) 100vw, (max-width: 1376px) and (pointer: coarse) 100vw, 75vw';
+
+const PopOver = ({
+  currentImage,
+  index,
+  total,
+  adjacentImages,
+  onClose,
+  onNextClick,
+  onPrevClick
+}: PopOverProps) => {
+  const [loadedPath, setLoadedPath] = useState<string | null>(null);
+  const isLoading = loadedPath !== currentImage.path;
   const dialogRef = useRef<HTMLDialogElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const titleId = useId();
@@ -30,6 +47,14 @@ const PopOver = ({currentImage, index, total, onClose, onNextClick, onPrevClick}
       opener?.focus();
     };
   }, []);
+
+  // Start downloading the neighbors at the size the popup will show them.
+  useEffect(() => {
+    adjacentImages.forEach(({path}) => {
+      const {props} = getImageProps({src: path, alt: '', fill: true, sizes: POPUP_IMAGE_SIZES});
+      preload(props.src, {as: 'image', imageSrcSet: props.srcSet, imageSizes: props.sizes});
+    });
+  }, [adjacentImages]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -81,12 +106,18 @@ const PopOver = ({currentImage, index, total, onClose, onNextClick, onPrevClick}
           >
             &#10094;
           </button>
+          {isLoading && <span className='popover-spinner' aria-hidden='true' />}
           <Image
+            key={currentImage.path}
             src={currentImage.path}
             alt={currentImage.title}
             fill
-            sizes='(max-width: 1032px) 100vw, (max-width: 1376px) and (pointer: coarse) 100vw, 75vw'
-            className='object-contain object-center'
+            loading='eager'
+            sizes={POPUP_IMAGE_SIZES}
+            onLoad={() => setLoadedPath(currentImage.path)}
+            className={`object-contain object-center transition-opacity duration-300 ${
+              isLoading ? 'opacity-0' : 'opacity-100'
+            }`}
           />
           <button
             type='button'

@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import './styles.css';
-import {useEffect, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import PopOver from './popup';
 import {imageInfoList} from './imageInfoList';
 
@@ -10,6 +10,14 @@ const ArtPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const currentImage = imageInfoList[currentIndex];
+  const count = imageInfoList.length;
+  const adjacentImages = useMemo(
+    () => [
+      imageInfoList[(currentIndex + 1) % count],
+      imageInfoList[(currentIndex - 1 + count) % count]
+    ],
+    [currentIndex, count]
+  );
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -42,6 +50,7 @@ const ArtPage = () => {
           currentImage={currentImage}
           index={currentIndex}
           total={imageInfoList.length}
+          adjacentImages={adjacentImages}
           onNextClick={() => setCurrentIndex((prev) => (prev + 1) % imageInfoList.length)}
           onPrevClick={() =>
             setCurrentIndex((prev) => (prev - 1 + imageInfoList.length) % imageInfoList.length)
