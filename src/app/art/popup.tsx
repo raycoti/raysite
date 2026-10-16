@@ -1,5 +1,5 @@
 import Image, {getImageProps} from 'next/image';
-import {useEffect, useId, useRef, useState} from 'react';
+import {type CSSProperties, useEffect, useId, useRef, useState} from 'react';
 import {preload} from 'react-dom';
 import type {ImageInfo} from './imageInfoList';
 import './popover.css';
@@ -36,6 +36,9 @@ const PopOver = ({
 }: PopOverProps) => {
   const [loadedPath, setLoadedPath] = useState<string | null>(null);
   const isLoading = loadedPath !== currentImage.path;
+  // Width / height of each loaded image, used to size the image area in the stacked layout.
+  const [imageRatios, setImageRatios] = useState<Record<string, number>>({});
+  const imageRatio = imageRatios[currentImage.path];
   const showDescription = hasDescription(currentImage);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -105,7 +108,10 @@ const PopOver = ({
         &#10005;
       </button>
       <div className='popover-content'>
-        <div className='popover-image-column'>
+        <div
+          className='popover-image-column'
+          style={imageRatio ? ({'--image-ratio': imageRatio} as CSSProperties) : undefined}
+        >
           <button
             type='button'
             className='nav-arrow nav-arrow-prev'
@@ -117,6 +123,7 @@ const PopOver = ({
           >
             &#10094;
           </button>
+          {/* Sits behind the image, so the artwork covers it as soon as it arrives. */}
           {isLoading && <span className='popover-spinner' aria-hidden='true' />}
           <Image
             key={currentImage.path}
@@ -125,10 +132,15 @@ const PopOver = ({
             fill
             loading='eager'
             sizes={popupImageSizes(currentImage)}
-            onLoad={() => setLoadedPath(currentImage.path)}
-            className={`object-contain object-center transition-opacity duration-300 ${
-              isLoading ? 'opacity-0' : 'opacity-100'
-            }`}
+            onLoad={(event) => {
+              const {naturalWidth, naturalHeight} = event.currentTarget;
+              setImageRatios((ratios) => ({
+                ...ratios,
+                [currentImage.path]: naturalWidth / naturalHeight
+              }));
+              setLoadedPath(currentImage.path);
+            }}
+            className='object-contain object-center'
           />
           <button
             type='button'

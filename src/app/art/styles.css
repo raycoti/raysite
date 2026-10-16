@@ -60,20 +60,26 @@
     grid-template-columns: repeat(4, 1fr);
     /* grid-template-rows: repeat(7, 1fr); */
     grid-gap: 0.5rem;
+    /* Every piece needs an area here, or it collapses to zero width on small screens. */
     grid-template-areas:
-      'soulSearching soulSearching soulSearching soulSearching '
-      'soulSearching soulSearching soulSearching soulSearching '
-      'tree tree kite desk '
-      'tree tree fish fish '
-      'tree tree fish fish '
-      'self self city city   '
-      'self self  city city '
+      'soulSearching soulSearching soulSearching soulSearching'
+      'soulSearching soulSearching soulSearching soulSearching'
+      'tree tree kite desk'
+      'tree tree fish fish'
+      'tree tree fish fish'
+      'self self city city'
+      'self self city city'
       'moon moon city city'
-      'moon moon arm bridge '
-      'shell shell shell turtle  '
-      'shell shell shell turtle '
-      'shell shell shell ray '
-      'shell shell shell ray ';
+      'moon moon arm bridge'
+      'shell shell shell turtle'
+      'shell shell shell turtle'
+      'shell shell shell existence'
+      'shell shell shell searchin'
+      'spiral spiral untitled untitled'
+      'spiral spiral untitled untitled'
+      'raySelf raySelf raySelf raySelf'
+      'raySelf raySelf raySelf raySelf'
+      'raySelf raySelf raySelf raySelf';
   }
 }
 

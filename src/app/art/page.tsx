@@ -39,7 +39,13 @@ const ArtPage = () => {
                 setCurrentIndex(index);
               }}
             >
-              <Image src={path} alt='' fill sizes='(min-width: 49rem) 33vw, 50vw' />
+              <Image
+                src={path}
+                alt=''
+                fill
+                sizes='(min-width: 49rem) 33vw, min(100vw, 33rem)'
+                className='object-cover'
+              />
             </button>
           ))}
         </div>

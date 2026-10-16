@@ -70,6 +70,8 @@
 }
 
 .popover-description-column {
+  display: flex;
+  flex-direction: column;
   flex: 1;
   height: 100%;
   overflow-y: auto;
@@ -85,6 +87,8 @@
   color: var(--color-ink);
   line-height: 1.6;
   cursor: auto;
+  /* Vertically centers the card beside the image; a long card still scrolls from its top. */
+  margin-block: auto;
 }
 
 .nav-arrow {
@@ -119,20 +123,20 @@
 
 /* Phones and tablets in portrait, plus touch tablets up to 13" iPad Pro landscape */
 @media (max-width: 1032px), (max-width: 1376px) and (pointer: coarse) {
+  /* Image and description are centered together as one group. */
   .popover-content {
     flex-direction: column;
+    justify-content: center;
   }
 
-  /* The image takes all the height the description doesn't need, and sits at the bottom of its
-     area so there's no gap above the description card. */
+  /* Sized to the image's own shape (--image-ratio is set from the loaded image), shrinking to fit
+     when the screen is too short, so there's no empty band between the image and the card. */
   .popover-image-column {
-    flex: 1 1 0;
+    flex: 0 1 auto;
+    width: 100%;
     height: auto;
     min-height: 0;
-  }
-
-  .popover-image-column img {
-    object-position: center bottom;
+    aspect-ratio: var(--image-ratio, 4 / 3);
   }
 
   /* Only as tall as its text; long descriptions scroll instead of squeezing the image. */
