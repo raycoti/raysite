@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import ResumeLink from '../resumeLink';
 
 const socialLinks = [
   {href: 'https://www.linkedin.com/in/raycoti/', icon: '/linkedin.png', label: 'LinkedIn'},
@@ -28,7 +29,8 @@ const AboutMePage = () => {
           </p>
         </div>
       </div>
-      <div className='mt-8 flex w-full justify-center gap-12'>
+      <div className='mt-8 flex w-full flex-wrap items-center justify-center gap-x-12 gap-y-6'>
+        <ResumeLink />
         {socialLinks.map(({href, icon, label}) => (
           <a
             key={href}

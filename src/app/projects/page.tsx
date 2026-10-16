@@ -1,6 +1,7 @@
 'use client';
 
 import {useState} from 'react';
+import ResumeLink from '../resumeLink';
 import ProjectItem from './projectItem';
 import {handleTabListKeyDown} from './tabKeyboard';
 import {
@@ -61,6 +62,9 @@ const ProjectsPage = () => {
         {activeCategory === 'professional' && (
           <div className='mb-8 max-w-2xl rounded-2xl border border-card-border bg-card-tint px-6 py-4 shadow-card'>
             <p className='font-body leading-relaxed'>{professionalOverview}</p>
+            <div className='mt-4'>
+              <ResumeLink label='View full resume' />
+            </div>
           </div>
         )}
 
