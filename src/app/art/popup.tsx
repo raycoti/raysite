@@ -18,12 +18,9 @@ interface PopOverProps {
 
 const hasDescription = (image: ImageInfo) => image.description.trim() !== '';
 
-// Width hint for the popup image: full width when there's no description column. Shared by the
-// popup image and the background preloads, so both request the same file.
-const popupImageSizes = (image: ImageInfo) =>
-  hasDescription(image)
-    ? '(max-width: 1032px) 100vw, (max-width: 1376px) and (pointer: coarse) 100vw, 75vw'
-    : '100vw';
+// The image is always full width. Shared by the popup image and the background preloads, so both
+// request the same file.
+const POPUP_IMAGE_SIZES = '100vw';
 
 const PopOver = ({
   currentImage,
@@ -36,7 +33,7 @@ const PopOver = ({
 }: PopOverProps) => {
   const [loadedPath, setLoadedPath] = useState<string | null>(null);
   const isLoading = loadedPath !== currentImage.path;
-  // Width / height of each loaded image, used to size the image area in the stacked layout.
+  // Width / height of each loaded image, used to size the image area.
   const [imageRatios, setImageRatios] = useState<Record<string, number>>({});
   const imageRatio = imageRatios[currentImage.path];
   const showDescription = hasDescription(currentImage);
@@ -59,13 +56,8 @@ const PopOver = ({
 
   // Start downloading the neighbors at the size the popup will show them.
   useEffect(() => {
-    adjacentImages.forEach((image) => {
-      const {props} = getImageProps({
-        src: image.path,
-        alt: '',
-        fill: true,
-        sizes: popupImageSizes(image)
-      });
+    adjacentImages.forEach(({path}) => {
+      const {props} = getImageProps({src: path, alt: '', fill: true, sizes: POPUP_IMAGE_SIZES});
       preload(props.src, {as: 'image', imageSrcSet: props.srcSet, imageSizes: props.sizes});
     });
   }, [adjacentImages]);
@@ -131,7 +123,7 @@ const PopOver = ({
             alt={currentImage.title}
             fill
             loading='eager'
-            sizes={popupImageSizes(currentImage)}
+            sizes={POPUP_IMAGE_SIZES}
             onLoad={(event) => {
               const {naturalWidth, naturalHeight} = event.currentTarget;
               setImageRatios((ratios) => ({
@@ -154,7 +146,7 @@ const PopOver = ({
             &#10095;
           </button>
         </div>
-        {/* Without a description the column is skipped and the image fills the width, centered.
+        {/* Without a description the card is skipped and the image is centered on its own.
             The title stays for screen readers, since it names the dialog. */}
         {showDescription ? (
           <div className='popover-description-column'>

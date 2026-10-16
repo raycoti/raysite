@@ -14,11 +14,6 @@
   cursor: pointer;
 }
 
-.overlay[open] {
-  display: flex;
-  justify-content: center;
-}
-
 .overlay::backdrop {
   background: transparent;
 }
@@ -49,33 +44,29 @@
   box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.6);
 }
 
-.overlay > .imageContainer {
-  width: 100vw;
-  margin: 10px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-}
-
+/* Image above the description, centered together as one group. */
 .popover-content {
   display: flex;
-  width: 100%;
+  flex-direction: column;
+  justify-content: center;
   height: 100%;
 }
 
+/* Sized to the image's own shape (--image-ratio is set from the loaded image), shrinking to fit
+   when the screen is too short, so there's no empty band between the image and the card. */
 .popover-image-column {
   position: relative;
-  flex: 3;
-  height: 100%;
+  flex: 0 1 auto;
+  min-height: 0;
+  aspect-ratio: var(--image-ratio, 4 / 3);
 }
 
+/* Only as tall as its text; long descriptions scroll instead of squeezing the image. */
 .popover-description-column {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  height: 100%;
+  flex: 0 0 auto;
+  max-height: 40%;
   overflow-y: auto;
-  padding: 16px;
+  padding: 12px 16px 16px;
 }
 
 .popover-description-card {
@@ -85,10 +76,10 @@
   border-radius: 16px;
   background-color: var(--color-card-tint);
   color: var(--color-ink);
+  max-width: 48rem;
+  margin-inline: auto;
   line-height: 1.6;
   cursor: auto;
-  /* Vertically centers the card beside the image; a long card still scrolls from its top. */
-  margin-block: auto;
 }
 
 .nav-arrow {
@@ -119,33 +110,6 @@
 
 .nav-arrow-next {
   right: 16px;
-}
-
-/* Phones and tablets in portrait, plus touch tablets up to 13" iPad Pro landscape */
-@media (max-width: 1032px), (max-width: 1376px) and (pointer: coarse) {
-  /* Image and description are centered together as one group. */
-  .popover-content {
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  /* Sized to the image's own shape (--image-ratio is set from the loaded image), shrinking to fit
-     when the screen is too short, so there's no empty band between the image and the card. */
-  .popover-image-column {
-    flex: 0 1 auto;
-    width: 100%;
-    height: auto;
-    min-height: 0;
-    aspect-ratio: var(--image-ratio, 4 / 3);
-  }
-
-  /* Only as tall as its text; long descriptions scroll instead of squeezing the image. */
-  .popover-description-column {
-    flex: 0 0 auto;
-    height: auto;
-    max-height: 40%;
-    padding-top: 12px;
-  }
 }
 
 /* Shown over the image area while a full-size image downloads. */
