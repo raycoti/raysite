@@ -7,6 +7,7 @@ interface ProjectItemProps {
   description: string;
   imagePath: string;
   link?: Project['link'];
+  tech?: string[];
   /** When set, the card is the tab panel for the project tab with this id. */
   panelId?: string;
   tabId?: string;
@@ -34,7 +35,15 @@ const ProjectLinkButton = ({name, link}: ProjectLink) =>
     </Link>
   );
 
-const ProjectItem = ({name, description, imagePath, link, panelId, tabId}: ProjectItemProps) => {
+const ProjectItem = ({
+  name,
+  description,
+  imagePath,
+  link,
+  tech = [],
+  panelId,
+  tabId
+}: ProjectItemProps) => {
   const links = toLinks(link);
 
   return (
@@ -45,7 +54,7 @@ const ProjectItem = ({name, description, imagePath, link, panelId, tabId}: Proje
       className='max-w-4xl flex-1 rounded-2xl border border-card-border bg-card p-6 shadow-card'
     >
       {/* Title with the links beside it; the links wrap under the title on phones. */}
-      <div className='mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
+      <div className='mb-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
         <h2 className='font-heading text-2xl capitalize'>{name}</h2>
         {links.length > 0 && (
           <div className='flex flex-wrap gap-2'>
@@ -55,6 +64,18 @@ const ProjectItem = ({name, description, imagePath, link, panelId, tabId}: Proje
           </div>
         )}
       </div>
+      {tech.length > 0 && (
+        <ul aria-label='Built with' className='mb-4 flex flex-wrap gap-2'>
+          {tech.map((item) => (
+            <li
+              key={item}
+              className='rounded-full border border-card-border bg-card-tint px-3 py-1 font-body text-sm'
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      )}
       <div className='flex flex-col gap-6'>
         {imagePath && (
           <div className='relative aspect-video w-full overflow-hidden rounded-xl'>

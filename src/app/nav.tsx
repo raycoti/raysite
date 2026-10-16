@@ -4,22 +4,26 @@ import Link from 'next/link';
 
 import './nav.css';
 
-const paths = ['/about', '/projects', '/art'];
+const links = [
+  {href: '/', label: 'about'},
+  {href: '/projects', label: 'projects'},
+  {href: '/art', label: 'art'}
+];
 
 const NavBar = () => {
   const pathname = usePathname();
   return (
     <nav id='nav' aria-label='Main'>
-      {paths.map((path) => {
-        const isActive = pathname === path;
+      {links.map(({href, label}) => {
+        const isActive = pathname === href;
         return (
           <Link
-            key={path}
+            key={href}
             className={isActive ? 'active' : undefined}
             aria-current={isActive ? 'page' : undefined}
-            href={path}
+            href={href}
           >
-            {path.replace('/', '')}
+            {label}
           </Link>
         );
       })}

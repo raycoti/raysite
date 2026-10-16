@@ -14,6 +14,8 @@ export interface Project {
    * "See project"; use a list of named links to show several, e.g. a repo and a live app.
    */
   link?: string | ProjectLink[];
+  /** Optional technologies used, shown as chips under the title and links. */
+  tech?: string[];
 }
 
 export type ProjectCategory = 'personal' | 'professional';
@@ -28,7 +30,8 @@ Maya3D, and Blender.`,
     link: [
       {name: 'Live app', link: 'https://interactivenarrative.azurewebsites.net/'},
       {name: 'GitHub', link: 'https://github.com/raycoti/Interactive-Narrative-'}
-    ]
+    ],
+    tech: ['Unity 3D', 'C#', 'Maya', 'Blender']
   },
   gameLevelGenerator: {
     name: 'Game level generator',
@@ -38,7 +41,8 @@ Maya3D, and Blender.`,
     link: [
       {name: 'Live app', link: 'https://playcanv.as/p/C6vQ4bnn/'},
       {name: 'GitHub', link: 'https://github.com/raycoti/environmentgenerator2'}
-    ]
+    ],
+    tech: ['React', 'PlayCanvas']
   }
 } satisfies Record<string, Project>;
 

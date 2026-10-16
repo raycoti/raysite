@@ -111,6 +111,7 @@ const ProjectsPage = () => {
               description={selectedProject.description}
               imagePath={selectedProject.image}
               link={selectedProject.link}
+              tech={selectedProject.tech}
             />
           )}
         </div>
