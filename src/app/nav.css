@@ -25,5 +25,11 @@
 }
 
 #nav > a.active {
-  color: #42b983;
+  /* Lighter than the original #42b983 to reach 4.5:1 contrast on the dark nav. */
+  color: #5fd3a0;
+}
+
+/* The site-wide purple focus ring is too dark to see on the nav. */
+#nav > a:focus-visible {
+  outline-color: #f0feff;
 }

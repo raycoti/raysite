@@ -30,14 +30,15 @@ const AboutMePage = () => {
       </div>
       <div className='mt-8 flex w-full justify-center gap-12'>
         {socialLinks.map(({href, icon, label}) => (
-          <a key={href} href={href} target='_blank' rel='noopener noreferrer'>
-            <Image
-              width={40}
-              height={40}
-              src={icon}
-              alt={label}
-              className='h-auto w-full max-w-12'
-            />
+          <a
+            key={href}
+            href={href}
+            target='_blank'
+            rel='noopener noreferrer'
+            aria-label={`${label} (opens in a new tab)`}
+            className='rounded-md'
+          >
+            <Image width={40} height={40} src={icon} alt='' className='h-auto w-full max-w-12' />
           </a>
         ))}
       </div>

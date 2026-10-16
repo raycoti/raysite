@@ -26,10 +26,16 @@ export interface ImageInfo {
   path: string;
   className: ArtImageKey;
   name: string;
+  /** Readable name for headings and labels, e.g. 'soulSearching' -> 'Soul Searching'. */
+  title: string;
   description: string;
 }
 
+const formatTitle = (name: string) =>
+  name.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/\b\w/g, (letter) => letter.toUpperCase());
+
 export const imageInfoList: ImageInfo[] = (Object.keys(artImages) as ArtImageKey[]).map((key) => ({
   ...artImages[key],
-  className: key
+  className: key,
+  title: formatTitle(artImages[key].name)
 }));

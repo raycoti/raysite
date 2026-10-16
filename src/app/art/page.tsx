@@ -17,20 +17,21 @@ const ArtPage = () => {
 
   return (
     <div className='h-dvh overflow-scroll bg-black'>
+      <h1 className='sr-only'>Art gallery</h1>
       <div className='grid-container'>
         <div className='art-grid-1'>
-          {imageInfoList.map(({path, className, name}, index) => (
+          {imageInfoList.map(({path, className, title}, index) => (
             <button
               type='button'
-              className={`${className} relative cursor-pointer hover:opacity-50`}
+              className={`${className} relative cursor-pointer hover:opacity-50 focus-visible:z-10 focus-visible:outline-4 focus-visible:-outline-offset-4 focus-visible:outline-white`}
               key={path}
-              aria-label={`View ${name}`}
+              aria-label={`View ${title}`}
               onClick={() => {
                 setShowModal(true);
                 setCurrentIndex(index);
               }}
             >
-              <Image src={path} alt={name} fill sizes='(min-width: 49rem) 33vw, 50vw' />
+              <Image src={path} alt='' fill sizes='(min-width: 49rem) 33vw, 50vw' />
             </button>
           ))}
         </div>
@@ -39,6 +40,8 @@ const ArtPage = () => {
         <PopOver
           onClose={() => setShowModal(false)}
           currentImage={currentImage}
+          index={currentIndex}
+          total={imageInfoList.length}
           onNextClick={() => setCurrentIndex((prev) => (prev + 1) % imageInfoList.length)}
           onPrevClick={() =>
             setCurrentIndex((prev) => (prev - 1 + imageInfoList.length) % imageInfoList.length)

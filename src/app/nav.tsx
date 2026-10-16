@@ -9,7 +9,7 @@ const paths = ['/about', '/art', '/projects'];
 const NavBar = () => {
   const pathname = usePathname();
   return (
-    <nav id='nav'>
+    <nav id='nav' aria-label='Main'>
       {paths.map((path) => {
         const isActive = pathname === path;
         return (
